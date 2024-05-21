@@ -1,0 +1,45 @@
+1. Pull Repo Terbaru (git pull origin dev).
+2. migrate database (php artisan migrate:fresh).
+3. Buka Web sqliteonline.com 'buatngecek databasenya'.
+4. Di sqliteonline.com ke menu File -> Open DB -> Buka File project -> Folder Database -> pilih file database.sqlite.
+5. cek semua table.
+6. Folder Routes -> File Web.php
+    Penjelasan :
+    Setiap fitur CRUD Sudah Punya Halaman (tampil data,edit data,hapus data),
+    view nya untuk tampil data pada tabel (itemspage, gamespage, orderspage, userspage),
+    untuk view create dan edit data ada di folder masing.
+
+
+
+Struktur Database:
+
+Table users:
+id INT
+name varchar
+role Varchar:
+phone INT
+
+Table games:
+id
+title
+picture
+
+Table items :
+id INT
+title varchar
+value INT
+value_up INT
+info varchar
+price INT
+id_games INT
+
+orders :
+id
+id_acc
+id_server
+id_user
+id_item
+
+
+
+

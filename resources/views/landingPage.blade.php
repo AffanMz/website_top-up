@@ -8,6 +8,5 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1 class="text-center text-red-500">Halo</h1>
 </body>
 </html>
