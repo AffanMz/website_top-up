@@ -6,12 +6,12 @@
     <title>Document</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-black">
+<body class="bg-[#151515]">
     <section class="flex justify-center items-center h-screen">
         <div class="border rounded-md border-white w-6/12">
         <div class="p-6">
           <img
-            src="../../assets/images/Logo.png"
+            src="images/Logo.png"
             alt="img-logo"
             class="rounded-full w-12 mb-5"
           />
