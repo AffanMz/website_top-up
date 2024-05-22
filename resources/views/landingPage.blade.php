@@ -75,13 +75,18 @@
 
         <!-- section game -->
         <section class="container mx-auto my-10">
-            <h4 class="text-white font-semibold text-xl mb-4">Games</h4>
-            @if(Auth::check())
-                @if(Auth::user()->isAdmin())
-                    <a href="{{ route('gamespage') }}" class="px-3 py-1 mb-5 bg-yellow-500 hover:bg-yellow-600 rounded-md ">Kelola Data Game</a>
-                    <a href="{{ route('orderspage') }}" class="px-3 py-1 mb-5 bg-green-500 hover:bg-green-600 rounded-md ">Kelola Data Order</a>
+            <div class="flex items-center justify-between mb-6">
+                <h4 class="text-white font-semibold text-xl">Games</h4>
+                @if(Auth::check())
+                    @if(Auth::user()->isAdmin())
+                    <div class="">
+                        <a href="{{ route('gamespage') }}" class="px-3 py-2 font-semibold mb-5 bg-yellow-500 hover:bg-yellow-600 rounded-md ">Kelola Data Game</a>
+                        <a href="{{ route('orderspage') }}" class="px-3 py-2 font-semibold mb-5 bg-green-500 hover:bg-green-600 rounded-md ">Kelola Data Order</a>
+                    </div>
+                    @endif
+
                 @endif
-            @endif
+            </div>
             <div class="grid grid-cols-4 gap-6">
                 @foreach ($games as $game)
                 <div class="card rounded-md shadow-md shadow-slate-700 relative overflow-hidden">
