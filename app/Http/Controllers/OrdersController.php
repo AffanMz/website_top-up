@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Order;
+use Twilio\Rest\Client;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -24,6 +26,7 @@ class OrdersController extends Controller
         return view('orders.create');
     }
 
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -35,6 +38,28 @@ class OrdersController extends Controller
             'id_user' => $request->id_user,
             'id_item' => $request->id_item            
         ]);
+
+        $id =  $request->id_item;
+
+        $items = Item::find($id);
+
+        $item = $request->id_acc;
+        $quantity = $request->id_server;
+        $info = $items->info;
+        $price = $items->price;
+
+        $message = "Saya ingin memesan item berikut:\n";
+        $message .= "Id Accont: $item\n";
+        $message .= "Id Sever: $quantity\n";
+        $message .= "Jenis: Rp $info\n";
+        $message .= "Total: Rp $price\n";
+        $message .= "Kirim Pesan Dan Kembali menggunakan url: http://website_top-up.test/orders";
+
+        // $this->sendWhatsAppMessage('+6287762752768', $message);
+
+        $whatsappUrl = "https://wa.me/6287762752768?text=" . urlencode($message);
+
+        return redirect($whatsappUrl);
 
         return redirect()->route('orderspage');
     }
