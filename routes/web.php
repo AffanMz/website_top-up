@@ -12,7 +12,7 @@ use App\Http\Controllers\OrdersController;
 
 Route::get('/', function () {
     return view('landingPage', ['title' => 'Welcome To Top Up', 'games' =>  Game::all()]);
-});
+})->name('landingPage');
 
 // auth login & logout
 Route::get('/login' , [UsersController::class,'login'])->name('login');
@@ -30,7 +30,7 @@ Route::get('/order-ent', function () {
 
 Route::get('/membership', function () {
     return view('membership');
-});
+})->name('membership');
 
 // Routes CRUD User
 
