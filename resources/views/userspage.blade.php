@@ -11,7 +11,7 @@
 <section class="flex justify-center items-center h-screen">
     <div class="border rounded-md border-white w-6/12">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <a href="{{ route('create') }}" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Tambah</a>
+            <a href="{{ route('users.create') }}" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Tambah</a>
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -42,7 +42,7 @@
                             {{ $data->name }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('edit',$data->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a href="{{ route('users.edit',$data->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             <form action="{{ route('users.destroy',$data->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

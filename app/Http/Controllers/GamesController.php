@@ -29,9 +29,19 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $image = $request->file('picture');
+        $imageName = time().'.'.$image->extension();
+
+        // Save the image to storage/app/public/images
+        $image->storeAs('public/images', $imageName);
+
         Game::create([
             'title' => $request->title,
-            'picture' => $request->picture
+            'picture' => $imageName
         ]);
 
         return redirect()->route('gamespage');
@@ -60,11 +70,28 @@ class GamesController extends Controller
     public function update(Request $request, string $id)
     {
         $data = Game::find($id);
+        
+        if (empty($request->picture)) {
+            $data->update([
+                'title' => $request->title
+            ]);
+        } else {
+            $request->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+    
+            $image = $request->file('picture');
+            $imageName = time().'.'.$image->extension();
+    
+            // Save the image to storage/app/public/images
+            $image->storeAs('public/images', $imageName);
 
-        $data->update([
-            'title' => $request->title,
-            'picture' => $request->picture
-        ]);
+            $data->update([
+                'title' => $request->title,
+                'picture' => $imageName
+            ]);
+
+        }
 
         return redirect()->route('gamespage');
     }

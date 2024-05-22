@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -22,7 +23,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('users.create');
     }
 
     /**
@@ -55,13 +56,46 @@ class UsersController extends Controller
         //
     }
 
+    public function login()
+    {
+        return view('login');
+    }
+
+    public function authlogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email dan Password tidak sesuai',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
         $data['cari'] = User::find($id);
-        return view('edit', $data);
+        return view('users.edit', $data);
     }
 
     /**
