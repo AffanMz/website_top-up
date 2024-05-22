@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('phone');
+            $table->string('role');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -25,21 +27,29 @@ return new class extends Migration
 
         User::create([
             'name' => 'Rohman',
+            'phone' => '087762752768',
+            'role' => 'admin',
             'email' => 'Rohman@xample.com',
-            'password' => Hash::make('Ini Password')
+            'password' => Hash::make('admin123')
         ]);
 
         User::create([
-            'name' => 'Rendi',
-            'email' => 'Rendi@xample.com',
-            'password' => Hash::make('Ini Password')
+            'name' => 'Alih',
+            'phone' => '087762752768',
+            'role' => 'user',
+            'email' => 'Alih@xample.com',
+            'password' => Hash::make('user123')
         ]);
 
         User::create([
-            'name' => 'Sukri',
-            'email' => 'Sukri@xample.com',
-            'password' => Hash::make('Ini Password')
+            'name' => 'Dwi',
+            'phone' => '087762752768',
+            'role' => 'admin',
+            'email' => 'Dwi@xample.com',
+            'password' => Hash::make('user123')
         ]);
+
+       
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

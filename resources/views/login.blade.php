@@ -15,17 +15,27 @@
             alt="img-logo"
             class="rounded-full w-12 mb-5"
           />
+          @if ($errors->any())
+              <div class="rounded-full ps-3 py-2 mb-2 bg-red-500 align-middle">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           <h1 class="font-bold text-3xl text-white">Masuk Akun</h1>
           <p class="text-white text-sm">
             Masuk ke akun yang telah anda daftarkan
           </p>
 
-          <form action="#" class="mt-3">
+          <form action="{{ route('authlogin') }}" class="mt-3" method="POST">
+            @csrf
             <div class="my-3">
               <input
-                type="number"
-                id="no_whatsapp"
-                name="no_whatsapp"
+                type="email"
+                id="email"
+                name="email"
                 required
                 placeholder="Nomor Whatsapp Anda"
                 class="w-full rounded-md px-3 py-2 text-sm italic"

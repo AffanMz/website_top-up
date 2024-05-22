@@ -11,19 +11,18 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\OrdersController;
 
 Route::get('/', function () {
-    $data['games'] = Game::all();
-    return view('landingPage', $data);
+    return view('landingPage', ['title' => 'Welcome To Top Up', 'games' =>  Game::all()]);
 });
 
-
-Route::get('/login', function () {
-    return view('login');
-});
+// auth login & logout
+Route::get('/login' , [UsersController::class,'login'])->name('login');
+Route::post('/logout' , [UsersController::class,'logout'])->name('logout');
+Route::post('/authlogin' , [UsersController::class,'authlogin'])->name('authlogin');
 
 Route::get('/order', function () {
     $data['items'] = Item::all();
     return view('order');
-});
+})->middleware('auth');
 
 Route::get('/order-ent', function () {
     return view('order-ent');
