@@ -21,17 +21,17 @@ return new class extends Migration
 
         Game::create([
             'title' => 'Mobile Legends',
-            'picture' => 'gambar(picture)'
+            'picture' => '1716293209.jpg'
         ]);
 
         Game::create([
             'title' => 'Free Fire',
-            'picture' => 'gambar(picture)'
+            'picture' => '1716293343.jpg'
         ]);
 
         Game::create([
-            'title' => 'Sudoku',
-            'picture' => 'gambar(picture)'
+            'title' => 'AOV',
+            'picture' => '1716293560.jpg'
         ]);
     }
 
