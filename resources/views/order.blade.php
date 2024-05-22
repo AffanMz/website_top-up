@@ -216,7 +216,9 @@
                     </div>
                 </div>
             </div>
+            <p class="mt-2 text-white italic text-sm">Orderan Di Proses di Whatsapp jika sudah mengklik Order, pastikan segera melakukan pembayaran sesuai metode pembayaran yang dipilih maka baru akan di proses pesanan</p>
         </section>
+
     </main>
 
     <!-- footer -->
