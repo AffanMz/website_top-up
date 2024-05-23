@@ -7,8 +7,59 @@
     <title>Halaman Users</title>
     @vite('resources/css/app.css');
 </head>
-<body>
-<section class="flex justify-center items-center h-screen">
+<body class="bg-[#151515]">
+    <x-header>
+
+    </x-header>
+
+    <main>
+        <section class="container mx-auto">
+            <form action="#">
+                <h3 class="text-white font-semibold text-2xl my-8">Pilihan Item</h3>
+                <div class="w-full grid grid-cols-2 gap-3">
+                    <div class="">
+                        <label for="spesial_item" class="cursor-pointer">
+                            <input type="radio" name="item" id="spesial_item" value="spesial_item" class="peer sr-only"/>
+                                <div class="max-w-xl flex items-center justify-center p-5 bg-white rounded-md hover:shadow ring-2 ring-transparent peer-checked:text-amber-300 peer-checked:ring-amber-200 peer-checked:ring-offset-2">
+                                    <p class="font-semibold text-lg">Spesial Item</p>
+                                </div>
+                        </label>
+                    </div>
+                    <div class="">
+                        <label for="top_up" class="cursor-pointer">
+                            <input type="radio" name="item" id="top_up" value="top_up" class="peer sr-only"/>
+                                <div class="max-w-xl flex items-center justify-center p-5 bg-white rounded-md hover:shadow ring-2 ring-transparent peer-checked:text-amber-300 peer-checked:ring-amber-200 peer-checked:ring-offset-2">
+                                    <p class="font-semibold text-lg">Top Up</p>
+                                </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="nominal_diamond" class="font-semibold my-8 text-2xl text-white">Judul / Nominal Diamond</label>
+                    <input type="number" placeholder="50" name="nominal_diamond" id="nominal_diamond" class="w-full rounded-md px-3 py-3 italic"/>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="harga_nominal" class="font-semibold my-8 text-2xl text-white">Harga Nominal</label>
+                    <input type="number" placeholder="Rp.20.000" name="harga_nominal" id="harga_nominal" class="w-full rounded-md px-3 py-3 italic"/>
+                </div>
+
+                <div class="my-12">
+                    <button
+                        type="submit"
+                        class="font-semibold text-xl block w-full bg-amber-300 p-3 rounded-md duration-200 ease-in-out transition hover:bg-amber-200"
+                    >
+                        Tambah List
+                    </button>
+                </div>
+            </form>
+
+        </section>
+        <!-- <section class="flex justify-center items-center h-screen">
+    </main>
+
+
     <div class="border rounded-md border-white w-6/12 ">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-10 bg-black">
             <form class="max-w-sm mx-auto" method="POST" action="{{ route('items.store') }}">
@@ -41,8 +92,12 @@
             </form>
         </div>
     </div>
-</section>
+</section> -->
 
+    <!-- footer -->
+    <x-footer>
 
+    </x-footer>
+    <!-- end footer -->
 </body>
 </html>
