@@ -91,7 +91,7 @@
                 @foreach ($games as $game)
                 <div class="card rounded-md shadow-md shadow-slate-700 relative overflow-hidden">
                     <img src="{{ asset('storage/images/' . $game->picture) }}" alt="{{$game->picture}}" class="h-full w-full object-cover">
-                    <a href="#">
+                    <a href="{{ route('order.show', $game->id) }} ">
                         <div class="card-body w-full h-full top-0 -right-full absolute bg-[#1f3d4738] backdrop-blur-xl flex justify-center flex-col items-center ">
                             <img src="images/Logo.png" alt="img-logo" class="w-12 rounded-full mb-4">
                             <h1 class="text-white font-normal text-sm">{{ $game->title }}</h1>

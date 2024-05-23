@@ -69,7 +69,9 @@ class OrdersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['game'] = Item::where('id_game', $id)->get();
+        // $data['game'] = Item::find($id);
+        return view('order', $data);
     }
 
     /**

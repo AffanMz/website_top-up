@@ -2,7 +2,7 @@
     <nav class="container mx-auto p-4 flex items-center justify-between z-10 text-white">
         <!-- logo -->
         <div>
-            <img src="images/Logo.png" alt="ini logo" class="rounded-full w-14">
+            <img src="{{ asset('images/logo.png') }}" alt="ini logo" class="rounded-full w-14">
         </div>
 
         <!-- nav item -->

@@ -19,18 +19,21 @@ Route::get('/login' , [UsersController::class,'login'])->name('login');
 Route::post('/logout' , [UsersController::class,'logout'])->name('logout');
 Route::post('/authlogin' , [UsersController::class,'authlogin'])->name('authlogin');
 
+
 Route::get('/order', function () {
     $data['items'] = Item::all();
     return view('order');
 })->middleware('auth');
 
+Route::get('/order/show/{id}' , [OrdersController::class,'show'])->name('order.show')->middleware('auth');
+
 Route::get('/order-ent', function () {
     return view('order-ent');
-});
+})->middleware('auth');
 
 Route::get('/membership', function () {
     return view('membership');
-})->name('membership');
+})->name('membership')->middleware('auth');
 
 // Routes CRUD User
 
