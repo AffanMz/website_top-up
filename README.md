@@ -5,9 +5,13 @@ Langkah - langkah Set Up
 aplikasi/software yang harus di install ----
 
 1.Install PHP versi 12 ^^
+
 2.Install Node Js versi terbaru
+
 3.Install Composer versi terbaru
+
 4.Install Visual Studio Code
+
 5.Install GIT
 
 Pembuatan Project ----
