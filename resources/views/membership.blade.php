@@ -7,6 +7,24 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#151515]">
+    <script>
+        // JavaScript function to open URL in a new tab
+        function openWhatsApp(url) {
+            if (url) {
+                window.open(url, '_blank');
+                url = null;
+                window.location.href = "{{ route('membership') }}";
+            } else {
+                console.error('URL WhatsApp tidak tersedia');
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = function() {
+            var url = "{{ $url ?? '' }}"; // Jika $url tidak ada, beri nilai default ''
+            openWhatsApp(url);
+        }
+    </script>
     <x-header>
 
     </x-header>
@@ -18,11 +36,12 @@
         </section>
 
         <section class="container mx-auto">
-            <form action="#">
+            <form action="{{ route('member') }}" method="POST" >
+                @csrf
                 <!-- membership -->
                 <div class="">
                     <h3 class="text-white text-2xl font-semibold my-6">Pilih Tipe Membership</h3>
-
+                    
                     <div class="grid grid-cols-3 gap-6">
                         <label for="silver" class="cursor-pointer">
                             <input type="radio" name="membership" id="silver" value="silver" class="peer sr-only">

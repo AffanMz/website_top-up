@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#151515]">
@@ -92,7 +92,7 @@
           <p class="text-white text-sm">Belum Punya Akun?</p>
           <div class="mt-3">
             <a
-              href="#"
+              href="{{ route('register') }}"
               class="font-semibold block text-center w-full bg-transparent border-amber-300 border text-white p-2 rounded-md duration-200 ease-in-out transition hover:bg-amber-300 hover:text-black"
             >
               Daftar Sekarang

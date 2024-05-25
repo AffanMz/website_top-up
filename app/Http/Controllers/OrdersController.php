@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\User;
 use App\Models\Order;
+use Twilio\Rest\Client;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -21,9 +24,11 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        $data['users'] = Order::all();
+        return view('orders.create', $data);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -36,7 +41,34 @@ class OrdersController extends Controller
             'id_item' => $request->id_item            
         ]);
 
-        return redirect()->route('orderspage');
+        $id =  $request->id_item;
+
+        $items = Item::find($id);
+
+        $game = Item::all($items->id_game);
+        $phone = User::find(auth()->id());
+
+        $item = $request->id_acc;
+        $quantity = $request->id_server;
+        $info = $items->info;
+        $price = $items->price;
+
+        $message = "Id Accont: $item | ";
+        $message .= "Id Sever: $quantity | ";
+        $message .= "Jenis: Rp $info | ";
+        $message .= "Total: Rp $price | ";
+        $message .= "Payment: $request->pay | ";
+        $message .= "WA: Rp $phone->phone ";
+
+        // $this->sendWhatsAppMessage('+6287762752768', $message);
+
+        $whatsappUrl = "https://wa.me/6287762752768?text=" . urlencode($message);
+
+        return view('order', ['nomer' => $items->id_game, 'url' => $whatsappUrl, 'game' => $game]);
+
+        // return redirect($whatsappUrl);
+
+        // return redirect()->route('orderspage');
     }
 
     /**
@@ -44,7 +76,26 @@ class OrdersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['game'] = Item::where('id_game', $id)->get();
+        $data['nomer'] = $id;
+        return view('order', $data);
+    }
+
+    public function membership(Request $request)
+    {
+        $phone = User::find(auth()->id());
+        $message = "Membership: $request->membership | ";
+        $message .= "payment: $request->pay | ";
+        $message .= "WA: Rp $phone->phone ";
+
+
+        $whatsappUrl = "https://wa.me/6287762752768?text=" . urlencode($message);
+
+        return view('membership', ['url' => $whatsappUrl]);
+        
+        // $data['game'] = Item::where('id_game', $id)->get();
+        // $data['nomer'] = $id;
+        // return view('order', $data);
     }
 
     /**
@@ -83,6 +134,6 @@ class OrdersController extends Controller
 
         $data->delete();
 
-        return redirect()->route('orderspage');
+        return redirect()->route('orders.create');
     }
 }

@@ -15,4 +15,13 @@ class Order extends Model
         'id_user',
         'id_item',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'id_item');
+    }
 }

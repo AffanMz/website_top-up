@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GamesController extends Controller
 {
@@ -13,7 +14,7 @@ class GamesController extends Controller
     public function index()
     {
         $data['games'] = Game::all();
-        return view('gamespage',$data);
+        return view('games.create',$data);
     }
 
     /**
@@ -21,7 +22,8 @@ class GamesController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+        $data['games'] = Game::all();
+        return view('games.create', $data);
     }
 
     /**
@@ -44,7 +46,7 @@ class GamesController extends Controller
             'picture' => $imageName
         ]);
 
-        return redirect()->route('gamespage');
+        return redirect()->route('games.create');
     }
 
     /**
@@ -93,7 +95,7 @@ class GamesController extends Controller
 
         }
 
-        return redirect()->route('gamespage');
+        return redirect()->route('games.create');
     }
 
     /**
@@ -103,8 +105,10 @@ class GamesController extends Controller
     {
         $data = Game::find($id);
 
+        Storage::delete(asset('storage/images'. $data->picture));
+    
         $data->delete();
 
-        return redirect()->route('gamespage');
+        return redirect()->route('games.create');
     }
 }

@@ -31,14 +31,7 @@ return new class extends Migration
             'price' => 50000,
             'id_game' => 1
         ]);
-        Item::create([
-            'title' => 'Diamod',
-            'value' => 5,
-            'value_up' => 0,
-            'info' => 'Top Up',
-            'price' => 20000,
-            'id_game' => 1
-        ]);
+
         Item::create([
             'title' => 'Diamod',
             'value' => 10,
@@ -47,6 +40,16 @@ return new class extends Migration
             'price' => 30000,
             'id_game' => 1
         ]);
+        
+        Item::create([
+            'title' => 'Diamod',
+            'value' => 5,
+            'value_up' => 0,
+            'info' => 'Top Up',
+            'price' => 20000,
+            'id_game' => 1
+        ]);
+        
     }
 
     /**
