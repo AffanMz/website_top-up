@@ -7,6 +7,25 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#151515]">
+    <script>
+        // JavaScript function to open URL in a new tab
+        function openWhatsApp(url, nomer) {
+            if (url) {
+                window.open(url, '_blank');
+                url = null;
+                window.location.href = "{{ route('order.show',"${nomer}") }}";
+            } else {
+                console.error('URL WhatsApp tidak tersedia');
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = function() {
+            var url = "{{ $url ?? '' }}"; // Jika $url tidak ada, beri nilai default ''
+            var nomer = "{{ $nomer }}";
+            openWhatsApp(url, nomer);
+        }
+    </script>
     <x-header>
 
     </x-header>
@@ -24,19 +43,21 @@
                     <h3 class="font-semibold text-xl">Masukan Data Akun Kamu</h3>
                 </div>
 
-                <form action="#" class="my-6">
+                <form action="{{ route('orders.store') }}" class="my-6" method="POST">
+                    @csrf
                         <div class="grid grid-cols-2 w-full">
                         <div class="flex flex-col">
-                            <label for="idAkun" class="font-semibold mb-2 text-lg">ID Akun</label>
-                            <input type="text" name="idAkun" id="idAkun" class="w-full rounded-md px-3 py-2">
+                            <label for="id_acc" class="font-semibold mb-2 text-lg">ID Akun</label>
+                            <input type="text" name="id_acc" id="id_acc" class="w-full rounded-md px-3 py-2">
                         </div>
                         <div class="flex flex-col ml-3">
-                            <label for="idAkun" class="font-semibold mb-2 text-lg">Server Kamu</label>
-                            <input type="text" name="idAkun" id="idAkun" class="w-full rounded-md px-3 py-2">
+                            <label for="id_server" class="font-semibold mb-2 text-lg">Server Kamu</label>
+                            <input type="text" name="id_server" id="id_server" class="w-full rounded-md px-3 py-2">
                         </div>
+                        
                     </div>
-                    </form>
-                    <p class="text-sm italic">Untuk menemukan ID & Server akun Anda, klik avatar Anda di pojok kiri atas layar dan buka tab Info Umum. Contoh: 12345678 (9864), maka ID adalah 12345678 dan Server adalah 9864</p>
+                
+                    <p class="text-sm italic mt-4">Untuk menemukan ID & Server akun Anda, klik avatar Anda di pojok kiri atas layar dan buka tab Info Umum. Contoh: 12345678 (9864), maka ID adalah 12345678 dan Server adalah 9864</p>
             </div>
         </section>
 
@@ -49,21 +70,25 @@
                         </div>
                         <h3 class="font-semibold text-xl">Pilih Nominal Diamond</h3>
                     </div>
-                    <div class="">
-                        <button class="px-4 py-2 font-semibold rounded-md bg-amber-300"><a href="#">Tambah</a></button>
-                        <button class="px-4 py-2 font-semibold rounded-md bg-amber-300"><a href="#">Edit</a></button>
-                        <button class="px-4 py-2 font-semibold rounded-md bg-amber-300"><a href="#">Delete</a></button>
-                    </div>
+                    @if(Auth::check())
+                        @if(Auth::user()->isAdmin())
+                        <div class="">
+                            <div class="">
+                                <button class="px-4 py-2 font-semibold rounded-md bg-amber-300 hover:bg-amber-500"><a href="{{ route('items.create', $nomer) }}">Kelola Data Item</a></button>
+                            </div>
+                        </div>
+                        @endif
+                    @endif
                 </div>
 
                 <div class="my-6">
                     <p class="font-semibold text-lg mb-2">Spesial Item</p>
                     <div class="grid grid-cols-3 gap-6">
                         @foreach ( $game as $item)
-                            @if ($item->info == 'Spesial Item')
+                            @if ($item->info == 'Special Item')
                                 <div class="">
                                     <label for="{{ $loop->iteration }}Weekly" class="cursor-pointer">
-                                        <input type="radio" value="{{ $loop->iteration }}Weekly" class="peer sr-only" id="{{ $loop->iteration }}Weekly" name="weekly"/>
+                                        <input type="radio" value="{{ $item->id }}" class="peer sr-only" id="{{ $loop->iteration }}Weekly" name="id_item"/>
                                         <div class=" max-w-xl p-5 bg-white rounded-md hover:shadow ring-2 ring-transparent peer-checked:text-amber-300 peer-checked:ring-amber-200 peer-checked:ring-offset-2">
                                             <div class="flex items-center justify-between">
                                                 <div class="flex flex-col">
@@ -93,7 +118,7 @@
                             @if ($item->info == 'Top Up')
                                 <div class="">
                                     <label for="{{ $loop->iteration }}diamond" class="cursor-pointer">
-                                        <input type="radio" value="{{ $loop->iteration }}diamond" class="peer sr-only" id="{{ $loop->iteration }}diamond" name="weekly"/>
+                                        <input type="radio" value="{{ $item->id }}" class="peer sr-only" id="{{ $loop->iteration }}diamond" name="id_item"/>
                                         <div class=" max-w-xl p-5 bg-white rounded-md hover:shadow ring-2 ring-transparent peer-checked:text-amber-300 peer-checked:ring-amber-200 peer-checked:ring-offset-2">
                                             <div class="flex items-center justify-between">
                                                 <div class="flex flex-col">
@@ -112,6 +137,7 @@
                                 </div>
                             @endif
                         @endforeach
+                        <input type="hidden" name="id_user" value="{{ auth()->id() }}">
                     </div>
                 </div>
 
@@ -167,13 +193,23 @@
                         <h3 class="font-semibold text-base">Cek pesanan ada terlebih dahulu pastikan data, orderan dan metode pembayaran sudah dipilih dengan di klik</h3>
                     </div>
                     <div class="">
-                        <button class="px-3 py-2 font-semibold rounded-md bg-amber-300 text-xl"><a href="#">Order</a></button>
-                        
+                        @if(Auth::check())
+                            @if(Auth::user()->isAdmin())
+                            <div class="">
+                                <div class="">
+                                    
+                                </div>
+                            </div>
+                            @else
+                            <button type="submit" class="px-3 py-2 font-semibold rounded-md bg-amber-300 hover:bg-amber-500 text-xl"> Order</button>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
             <p class="mt-2 text-white italic text-sm">Orderan Di Proses di Whatsapp jika sudah mengklik Order, pastikan segera melakukan pembayaran sesuai metode pembayaran yang dipilih maka baru akan di proses pesanan</p>
         </section>
+    </form>
 
     </main>
 

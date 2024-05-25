@@ -13,17 +13,32 @@
                     <img src="{{ asset('images/Logo_ovo.png') }} " alt="" class="w-16">
                 </div>
         </div>
+        @php
+        use App\Models\User;
+
+            // Mengambil data user dari model
+            $user = User::find(1);
+
+            // Format nomor telepon
+            if ($user) {
+                $phoneNumber = $user->phone;
+                $formattedPhoneNumber = '62' . substr($phoneNumber, 1);
+                $whatsappUrl = 'https://wa.me/' . $formattedPhoneNumber . '?text=';
+            } else {
+                $whatsappUrl = '#'; // Fallback jika user tidak ditemukan
+            }
+        @endphp
         <div class="w-4/12 flex flex-col">
             <div class="mb-4">
                 <h4 class="font-semibold text-white mb-5 text-xl">Social Media</h4>
                 <div class="flex flex-row items-center">
                 <div class="flex items-center gap-2 mr-3">
                         <img src="{{ asset('images/icon-ig.svg') }}" alt="icon-ig" class="w-6">
-                        <a href="" class="text-white">@jesterdiamond</a>
+                        <a href="https://www.instagram.com/jesterdiamond_?igsh=MWJkMWpnNWRwNTRibw==" target="_blank" class="text-white">@jesterdiamond</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <img src="{{ asset('images/icon-wa.svg') }}" alt="icon-wa" class="w-6">
-                        <a href="" class="text-white">0878-1579-7525</a>
+                        <a href="{{ $whatsappUrl }}bisa bantu saya?" target="_blank" class="text-white">0878-1579-7525</a>
                     </div>
                 </div>
             </div>  
@@ -31,7 +46,7 @@
             <div class="mb-3">
                 <h4 class="font-semibold text-white mb-2 text-xl">Peta Situs</h4>
                 <div class="flex flex-row">
-                    <p><a href="#" class="text-sm text-white mr-4">Beranda</a></p>
+                    <p><a href="{{ route('landingPage') }}" class="text-sm text-white mr-4">Beranda</a></p>
                     <p><a href="#" class="text-sm text-white">Daftar Layanan</a></p>
                 </div>
             </div>
@@ -39,8 +54,8 @@
             <div class="">
                 <h4 class="font-semibold text-white mb-2 text-xl">Dukungan Pelanggan</h4>
                 <div class="flex flex-row">
-                    <p><a href="#" class="text-sm text-white mr-4">Admin 24 Jam</a></p>
-                    <p><a href="#" class="text-sm text-white">Membership</a></p>
+                    <p><a href="{{ $whatsappUrl }}bisa bantu saya?" class="text-sm text-white mr-4">Admin 24 Jam</a></p>
+                    <p><a href="{{ route('membership') }}" class="text-sm text-white">Membership</a></p>
                 </div>
             </div>
 

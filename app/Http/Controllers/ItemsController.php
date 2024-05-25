@@ -19,9 +19,11 @@ class ItemsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        return view('items.create');
+        $data['items'] = Item::where('id_game', $id)->get();
+        $data['id'] = $id;
+        return view('items.create', $data);
     }
 
     /**
@@ -35,10 +37,9 @@ class ItemsController extends Controller
             'value_up' => $request->value_up,
             'info' => $request->info,
             'price' => $request->price,
-            'id_game' => $request->game
+            'id_game' => $request->id_game
         ]);
-
-        return redirect()->route('itemspage');
+        return redirect()->route('items.create', $request->id_game);
     }
 
     /**
@@ -71,10 +72,10 @@ class ItemsController extends Controller
             'value_up' => $request->value_up,
             'info' => $request->info,
             'price' => $request->price,
-            'id_game' => $request->game
+            'id_game' => $request->id_game
         ]);
 
-        return redirect()->route('itemspage');
+        return redirect()->route('items.create', $request->id_game);
     }
 
     /**
@@ -86,6 +87,6 @@ class ItemsController extends Controller
 
         $data->delete();
 
-        return redirect()->route('itemspage');
+        return redirect()->route('items.create', $data->id_game);
     }
 }

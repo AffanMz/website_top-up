@@ -80,8 +80,9 @@
                 @if(Auth::check())
                     @if(Auth::user()->isAdmin())
                     <div class="">
-                        <a href="{{ route('gamespage') }}" class="px-3 py-2 font-semibold mb-5 bg-yellow-500 hover:bg-yellow-600 rounded-md ">Kelola Data Game</a>
-                        <a href="{{ route('orderspage') }}" class="px-3 py-2 font-semibold mb-5 bg-green-500 hover:bg-green-600 rounded-md ">Kelola Data Order</a>
+                        <a href="{{ route('games.create') }}" class="px-3 py-2 font-semibold mb-5 bg-yellow-500 hover:bg-yellow-600 rounded-md ">Kelola Data Game</a>
+                        <a href="{{ route('users.createadmin') }}" class="px-3 py-2 font-semibold mb-5 bg-green-500 hover:bg-green-600 rounded-md ">Kelola Data User</a>
+                        <a href="{{ route('orders.create') }}" class="px-3 py-2 font-semibold mb-5 bg-blue-500 hover:bg-blue-600 rounded-md ">Kelola Data order</a>
                     </div>
                     @endif
 

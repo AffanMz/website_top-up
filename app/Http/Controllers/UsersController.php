@@ -23,29 +23,53 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $data['users'] = User::all();
+        return view('users.createadmin', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'number' =>  'required',
-            'password' => 'required',
-        ],[
-            'number.required' => 'nomer tidak boleh kosong',
-            'password.required' => 'password tidak boleh kosong'
-        ]);
+    {        
+        // $request->validate([
+        //     'number' =>  'required',
+        //     'password' => 'required',
+        // ],[
+        //     'number.required' => 'nomer tidak boleh kosong',
+        //     'password.required' => 'password tidak boleh kosong'
+        // ]);
 
         User::create([
-            'name' => 'kosong',
-            'email' => $request->number,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('userspage');
+        return redirect()->route('users.createadmin');
+    }
+
+    public function regis(Request $request)
+    {        
+        // $request->validate([
+        //     'number' =>  'required',
+        //     'password' => 'required',
+        // ],[
+        //     'number.required' => 'nomer tidak boleh kosong',
+        //     'password.required' => 'password tidak boleh kosong'
+        // ]);
+
+        User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('login');
     }
 
     /**
@@ -59,6 +83,11 @@ class UsersController extends Controller
     public function login()
     {
         return view('login');
+    }
+
+    public function register()
+    {
+        return view('register');
     }
 
     public function authlogin(Request $request)
@@ -78,6 +107,7 @@ class UsersController extends Controller
             'email' => 'Email dan Password tidak sesuai',
         ]);
     }
+    
 
     public function logout(Request $request)
     {
@@ -108,18 +138,22 @@ class UsersController extends Controller
 
         if (empty($password)) {
             $data->update([
-                'name' => 'kosong',
-                'email' => $request->number
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'role' => $request->role,
+                'email' => $request->email,
             ]);
         } else {
             $data->update([
-                'name' => 'kosong',
-                'email' => $request->number,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'role' => $request->role,
+                'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
         }
 
-        return redirect()->route('userspage');   
+        return redirect()->route('users.createadmin');   
     }
 
     /**
@@ -131,7 +165,7 @@ class UsersController extends Controller
 
         $data->delete();
 
-        return redirect()->route('userspage');
+        return redirect()->route('users.createadmin');
 
     }
 }

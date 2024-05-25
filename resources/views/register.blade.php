@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Registrasi</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#151515]">
@@ -24,12 +24,12 @@
                   </ul>
               </div>
           @endif
-          <h1 class="font-bold text-3xl text-white">Masuk Akun</h1>
+          <h1 class="font-bold text-3xl text-white">Daftar Akun</h1>
           <p class="text-white text-sm">
-            Masuk ke akun yang telah anda daftarkan
+            Daftarkan akun kamu sekarang juga
           </p>
 
-          <form action="{{ route('authlogin') }}" class="mt-3" method="POST">
+          <form action="{{ route('regis') }}" class="mt-3" method="POST">
             @csrf
             <div class="my-3">
               <input
@@ -37,10 +37,31 @@
                 id="email"
                 name="email"
                 required
-                placeholder="Nomor Whatsapp Anda"
+                placeholder="Email Akun Anda"
                 class="w-full rounded-md px-3 py-2 text-sm italic"
               />
             </div>
+            <div class="my-3">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Nama Panggilan Anda"
+                class="w-full rounded-md px-3 py-2 text-sm italic"
+              />
+            </div>
+            <input type="hidden" name="role" value="user">
+            <div class="my-3">
+                <input
+                  type="phone"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="Nomor Whatsapp Anda"
+                  class="w-full rounded-md px-3 py-2 text-sm italic"
+                />
+              </div>
             <div class="my-3 flex items-center justify-between relative">
               <input
                 type="password"
@@ -70,14 +91,6 @@
               </svg>
             </div>
 
-            <div class="flex justify-between items-center">
-              <span class="flex justify-center items-center gap-2">
-                <input type="checkbox" />
-                <p class="text-white text-sm">Ingat saya</p>
-              </span>
-              <a href="#" class="text-white text-sm">Lupa Password?</a>
-            </div>
-
             <div class="my-8">
               <button
                 type="submit"
@@ -85,17 +98,17 @@
                 name="btn_masuk"
                 class="font-semibold block w-full bg-amber-300 p-2 rounded-md duration-200 ease-in-out transition hover:bg-amber-200"
               >
-                Masuk
+                Daftar
               </button>
             </div>
           </form>
-          <p class="text-white text-sm">Belum Punya Akun?</p>
+          <p class="text-white text-sm">Sudah Punya Akun?</p>
           <div class="mt-3">
             <a
-              href="{{ route('register') }}"
+              href="{{ route('login') }}"
               class="font-semibold block text-center w-full bg-transparent border-amber-300 border text-white p-2 rounded-md duration-200 ease-in-out transition hover:bg-amber-300 hover:text-black"
             >
-              Daftar Sekarang
+            Login
             </a>
           </div>
         </div>

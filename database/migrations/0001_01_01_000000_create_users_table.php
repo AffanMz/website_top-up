@@ -26,26 +26,26 @@ return new class extends Migration
         });
 
         User::create([
-            'name' => 'Rohman',
-            'phone' => '087762752768',
+            'name' => 'Admin',
+            'phone' => '087815797525',
             'role' => 'admin',
-            'email' => 'Rohman@xample.com',
+            'email' => 'Admin@xample.com',
             'password' => Hash::make('admin123')
         ]);
 
         User::create([
-            'name' => 'Alih',
-            'phone' => '087762752768',
+            'name' => 'User',
+            'phone' => '08191815567',
             'role' => 'user',
-            'email' => 'Alih@xample.com',
+            'email' => 'User@xample.com',
             'password' => Hash::make('user123')
         ]);
 
         User::create([
-            'name' => 'Dwi',
-            'phone' => '087762752768',
-            'role' => 'admin',
-            'email' => 'Dwi@xample.com',
+            'name' => 'User2',
+            'phone' => '08191815567',
+            'role' => 'user',
+            'email' => 'User2@xample.com',
             'password' => Hash::make('user123')
         ]);
 

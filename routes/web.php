@@ -15,7 +15,9 @@ Route::get('/', function () {
 })->name('landingPage');
 
 // auth login & logout
-Route::get('/login' , [UsersController::class,'login'])->name('login');
+Route::get('/login' , [UsersController::class,'login'])->name('login')->middleware('guest');
+Route::get('/register' , [UsersController::class,'register'])->name('register')->middleware('guest');
+Route::post('/regis' , [UsersController::class,'regis'])->name('regis');
 Route::post('/logout' , [UsersController::class,'logout'])->name('logout');
 Route::post('/authlogin' , [UsersController::class,'authlogin'])->name('authlogin');
 
@@ -35,61 +37,63 @@ Route::get('/membership', function () {
     return view('membership');
 })->name('membership')->middleware('auth');
 
+Route::post('/member' , [OrdersController::class,'membership'])->name('member');
+
 // Routes CRUD User
 
-Route::get('/users' , [UsersController::class,'index'])->name('userspage');
+Route::get('/users/createadmin' , [UsersController::class,'create'])->name('users.createadmin')->middleware('auth');
 
-Route::post('/users' , [UsersController::class,'store'])->name('users.store');
+Route::post('/users/store' , [UsersController::class,'store'])->name('users.store');
 
-Route::get('/users/create' , [UsersController::class,'create'])->name('users.create');
+// Route::get('/users/create/{id}' , [UsersController::class,'create'])->name('users.create')->middleware('auth');
 
-Route::put('/users/update/{id}' , [UsersController::class,'update'])->name('users.update');
+Route::put('/users/update/{id}' , [UsersController::class,'update'])->name('users.update')->middleware('auth');
 
-Route::get('/users/edit/{id}' , [UsersController::class,'edit'])->name('users.edit');
+Route::get('/users/edit/{id}' , [UsersController::class,'edit'])->name('users.edit')->middleware('auth');
 
-Route::delete('/users/destroy/{id}' , [UsersController::class,'destroy'])->name('users.destroy');
+Route::delete('/users/destroy/{id}' , [UsersController::class,'destroy'])->name('users.destroy')->middleware('auth');
 
 // Routes CRUD Item
 
-Route::get('/items' , [ItemsController::class,'index'])->name('itemspage');
+Route::get('/items' , [ItemsController::class,'index'])->name('itemspage')->middleware('auth');
 
-Route::post('/items' , [ItemsController::class,'store'])->name('items.store');
+Route::post('/items/store' , [ItemsController::class,'store'])->name('items.store')->middleware('auth');
 
-Route::get('/items/create' , [ItemsController::class,'create'])->name('items.create');
+Route::get('/items/create/{id}' , [ItemsController::class,'create'])->name('items.create')->middleware('auth');
 
-Route::put('/items/update/{id}' , [ItemsController::class,'update'])->name('items.update');
+Route::put('/items/update/{id}' , [ItemsController::class,'update'])->name('items.update')->middleware('auth');
 
-Route::get('/items/edit/{id}' , [ItemsController::class,'edit'])->name('items.edit');
+Route::get('/items/edit/{id}' , [ItemsController::class,'edit'])->name('items.edit')->middleware('auth');
 
-Route::delete('/items/destroy/{id}' , [ItemsController::class,'destroy'])->name('items.destroy');
+Route::delete('/items/destroy/{id}' , [ItemsController::class,'destroy'])->name('items.destroy')->middleware('auth');
 
 // Routes CRUD Game
 
-Route::get('/games' , [GamesController::class,'index'])->name('gamespage');
+Route::get('/games' , [GamesController::class,'index'])->name('gamespage')->middleware('auth');
 
-Route::post('/games' , [GamesController::class,'store'])->name('games.store');
+Route::post('/games' , [GamesController::class,'store'])->name('games.store')->middleware('auth');
 
-Route::get('/games/create' , [GamesController::class,'create'])->name('games.create');
+Route::get('/games/create' , [GamesController::class,'create'])->name('games.create')->middleware('auth');
 
-Route::put('/games/update/{id}' , [GamesController::class,'update'])->name('games.update');
+Route::put('/games/update/{id}' , [GamesController::class,'update'])->name('games.update')->middleware('auth');
 
-Route::get('/games/edit/{id}' , [GamesController::class,'edit'])->name('games.edit');
+Route::get('/games/edit/{id}' , [GamesController::class,'edit'])->name('games.edit')->middleware('auth');
 
-Route::delete('/games/destroy/{id}' , [GamesController::class,'destroy'])->name('games.destroy');
+Route::delete('/games/destroy/{id}' , [GamesController::class,'destroy'])->name('games.destroy')->middleware('auth');
 
 // Routes CRUD Order
 
-Route::get('/orders' , [OrdersController::class,'index'])->name('orderspage');
+Route::get('/orders' , [OrdersController::class,'index'])->name('orderspage')->middleware('auth');
 
-Route::post('/orders' , [OrdersController::class,'store'])->name('orders.store');
+Route::post('/orders/store' , [OrdersController::class,'store'])->name('orders.store')->middleware('auth');
 
-Route::get('/orders/create' , [OrdersController::class,'create'])->name('orders.create');
+Route::get('/orders/create' , [OrdersController::class,'create'])->name('orders.create')->middleware('auth');
 
-Route::put('/orders/update/{id}' , [OrdersController::class,'update'])->name('orders.update');
+Route::put('/orders/update/{id}' , [OrdersController::class,'update'])->name('orders.update')->middleware('auth');
 
-Route::get('/orders/edit/{id}' , [OrdersController::class,'edit'])->name('orders.edit');
+Route::get('/orders/edit/{id}' , [OrdersController::class,'edit'])->name('orders.edit')->middleware('auth');
 
-Route::delete('/orders/destroy/{id}' , [OrdersController::class,'destroy'])->name('orders.destroy');
+Route::delete('/orders/destroy/{id}' , [OrdersController::class,'destroy'])->name('orders.destroy')->middleware('auth');
 
 
 

@@ -1,3 +1,42 @@
+## Website Top Up
+
+Langkah - langkah Set Up
+
+aplikasi/software yang harus di install ----
+
+1.Install PHP versi 12 ^^
+2.Install Node Js versi terbaru
+3.Install Composer versi terbaru
+4.Install Visual Studio Code
+5.Install GIT
+
+Pembuatan Project ----
+1.Siapkan folder yang di inginkan unutuk menyimpan project
+2.Klik Kanan pada folder lalu pilih open GIT bash here 
+3.Masukkan perintah "git clone link repo" GIT Bash
+4.Setalah selesai buka folder tadi dan akan ada folder dengan nama website_top-up
+5.Klik kanan pada folder website_top-up lalu pilih open GIT bash here
+6.Masukkan perintah "code ." pada GIT Bash
+7.Visual Studio Code akan terbuka
+8.Masukkan perintah "composer install"  pada GIT Bash
+9.Masukkan perintah "php artisan view:cache"  pada GIT Bash
+10.Masukkan perintah "php artisan route:cache"  pada GIT Bash
+11.Masukkan perintah "php artisan config:cache"  pada GIT Bash
+12.Masukkan perintah "php artisan migrate:fresh"  pada GIT Bash
+13.Masukkan perintah "php artisan storage:link"  pada GIT Bash
+14.Masukkan perintah "php artisan serve"  pada GIT Bash
+15.Salin link yang muncul dalam GIT Bash seperti "http:127.0.01.1" biarkan jangan diclose
+16.Buka Web Browser dan buka link yang telah di salin tadi.
+17.Klik kanan pada folder website_top-up lalu pilih open GIT bash here.
+18.Masukkan perintah pada GIT Bash yang baru "npm run dev" pada GIT Bash.
+19.Refresh Halaman web yang sudah dibuka tadi.
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
